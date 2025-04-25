@@ -1,0 +1,424 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'VT323', monospace; /* فونت هکری */
+    background-color: #111;
+    color: white;
+    padding: 20px;
+    direction: rtl;
+    text-align: right;
+    background-image: url('https://uploadkon.ir/uploads/891915_25Jowhareh-galleries-3-poster-45773b6b-6408-46c3-b077-f0cb14cc3491.jpeg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: relative;
+    overflow-x: hidden;
+}
+
+/* افکت ماتریکس برای پس‌زمینه (اختیاری) */
+.matrix-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.3);
+    z-index: -1;
+    pointer-events: none;
+}
+
+/* افکت کدهای در حال ریزش (ماتریکس) */
+.matrix-bg::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.8));
+    z-index: 1;
+}
+
+.container {
+    max-width: 800px;
+    margin: auto;
+    background: rgba(0, 0, 0, 0.6); /* پس‌زمینه نیمه‌شفاف */
+    padding: 20px;
+    border-radius: 10px;
+    border: 1px solid #0f0;
+    box-shadow: 0 0 15px rgba(0, 255, 0, 0.3);
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: rgb(255, 0, 0);
+    text-shadow: 0 0 10px rgb(255, 0, 0), 0 0 20px rgb(255, 0, 0);
+    animation: flicker 1.5s infinite alternate;
+}
+
+h2 {
+    margin-top: 20px;
+    color: rgb(46, 187, 46);
+    text-shadow: 0 0 5px rgb(46, 187, 46);
+}
+
+input, button {
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #0f0;
+    border-radius: 5px;
+    background-color: #222;
+    color: white;
+    font-family: 'VT323', monospace;
+    font-size: 18px;
+}
+
+input:focus, button:focus {
+    outline: none;
+    border-color: #ff0;
+    box-shadow: 0 0 10px #ff0;
+}
+
+button {
+    cursor: pointer;
+    padding: 10px 20px;
+    transition: all 0.3s;
+}
+
+button:hover {
+    background: #0f0;
+    color: #000;
+    box-shadow: 0 0 15px #0f0;
+}
+
+.neon-button {
+    border: 2px solid #0f0;
+    background: none;
+    color: #0f0;
+    text-shadow: 0 0 5px #0f0;
+}
+
+.neon-button:hover {
+    background: #0f0;
+    color: #000;
+    box-shadow: 0 0 15px #0f0;
+}
+
+#password-result, #encryption-result, #console-output {
+    margin-top: 10px;
+    background: #111;
+    border: 1px solid #0f0;
+    padding: 15px;
+    border-radius: 5px;
+    font-size: 16px;
+    text-align: left;
+    direction: ltr; /* برای شبیه‌سازی کنسول */
+    color: #0f0;
+}
+
+.console {
+    height: 150px;
+    overflow-y: auto;
+    font-family: 'Courier New', monospace;
+}
+
+.security-alert {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: red;
+    color: white;
+    padding: 15px;
+    font-size: 18px;
+    border-radius: 5px;
+    z-index: 9999;
+    opacity: 0.9;
+    box-shadow: 0 0 10px red;
+}
+
+canvas {
+    margin-top: 20px;
+    background-color: #222;
+    border: 1px solid #0f0;
+}
+
+a {
+    color: rgb(10, 255, 218);
+    text-decoration: none;
+    transition: all 0.3s;
+}
+
+a:hover {
+    text-shadow: 0 0 10px rgb(10, 255, 218);
+}
+
+/* مودال */
+#modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.7);
+    animation: fadeIn 0.3s;
+}
+
+.modal-content {
+    background-color: #2b0000;
+    margin: 15% auto;
+    padding: 20px;
+    border: 5px solid #0f0;
+    width: 60%;
+    max-width: 600px;
+    border-radius: 20px;
+    box-shadow: 0 0 20px rgba(0, 255, 0, 0.5);
+}
+
+.closeBtn {
+    color: #0f0;
+    float: left;
+    font-size: 30px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.closeBtn:hover,
+.closeBtn:focus {
+    color: #ff0;
+    text-decoration: none;
+}
+
+#commentsSection {
+    margin: 20px;
+}
+
+#commentsList {
+    list-style-type: none;
+    padding: 0;
+}
+
+#commentsList li {
+    background: #222;
+    border: 1px solid #0f0;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 5px;
+}
+
+.custom-input {
+    padding: 15px;
+    margin: 15px 0;
+    border: 2px solid #0f0;
+    border-radius: 10px;
+    background-color: #333;
+    color: #fff;
+    width: 100%;
+    font-family: 'VT323', monospace;
+}
+
+.custom-input:focus {
+    outline: none;
+    border-color: #ff0;
+    box-shadow: 0 0 10px #ff0;
+}
+
+/* انیمیشن flicker برای نئون */
+@keyframes flicker {
+    0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
+        text-shadow: 0 0 10px #0f0, 0 0 20px #0f0;
+    }
+    20%, 24%, 55% {
+        text-shadow: none;
+    }
+}
+
+/* انیمیشن fadeIn برای مودال */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* استایل خروجی‌های هک */
+#password-result, #encryption-result {
+    margin-top: 10px;
+    background: #111;
+    border: 1px solid #0f0;
+    padding: 15px;
+    border-radius: 5px;
+    font-size: 16px;
+    text-align: left;
+    direction: ltr; /* برای حس کنسول */
+    color: #0f0;
+    font-family: 'Courier New', monospace;
+    position: relative;
+    overflow: hidden;
+    min-height: 60px; /* برای جلوگیری از پرش */
+    text-shadow: 0 0 5px #0f0;
+    animation: flicker 1.5s infinite alternate;
+}
+
+/* افکت اسکن */
+#password-result::before, #encryption-result::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(0, 255, 0, 0.3), transparent);
+    animation: scan 2s linear infinite;
+}
+
+/* افکت پردازش (کاراکترهای تصادفی) */
+.processing::after {
+    content: 'Processing... █';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #0f0;
+    font-size: 14px;
+    opacity: 0.7;
+    animation: blink 0.5s infinite;
+}
+
+/* انیمیشن اسکن */
+@keyframes scan {
+    0% { left: -100%; }
+    100% { left: 100%; }
+}
+
+/* انیمیشن چشمک زدن */
+@keyframes blink {
+    50% { opacity: 0; }
+}
+
+/* تقویت انیمیشن flicker */
+@keyframes flicker {
+    0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
+        text-shadow: 0 0 10px #0f0, 0 0 20px #0f0, 0 0 30px #00f;
+    }
+    20%, 24%, 55% {
+        text-shadow: none;
+    }
+}
+
+/* کوچیک‌تر کردن پس‌زمینه */
+body {
+    font-family: 'VT323', monospace;
+    background-color: #000000;
+    color: rgb(255, 255, 255);
+    padding: 20px;
+    direction: rtl;
+    text-align: right;
+    background-image: url('https://uploadkon.ir/uploads/891915_25Jowhareh-galleries-3-poster-45773b6b-6408-46c3-b077-f0cb14cc3491.jpeg');
+    background-size: 2000px; /* کوچیک‌تر کردن تصویر (می‌تونی درصد یا px بدی) */
+    background-position: center;
+    background-repeat: no-repeat;
+    position: relative;
+    overflow-x: hidden;
+}
+
+/* افکت محو برای لبه‌های پس‌زمینه */
+body {
+    font-family: 'VT323', monospace;
+    background-color: #111;
+    color: white;
+    padding: 20px;
+    direction: rtl;
+    text-align: right;
+    background-image: url('https://uploadkon.ir/uploads/891915_25Jowhareh-galleries-3-poster-45773b6b-6408-46c3-b077-f0cb14cc3491.jpeg');
+    background-size: cover; /* تمام‌صفحه */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed; /* ثابت نگه داشتن تصویر */
+    position: relative;
+    overflow-x: hidden;
+    z-index: 1;
+}
+
+/* استایل کنسول مانیتورینگ */
+#network-console {
+    background: #111;
+    border: 1px solid #0f0;
+    padding: 15px;
+    height: 200px;
+    overflow-y: auto;
+    font-family: 'Courier New', monospace;
+    font-size: 16px;
+    color: #0f0;
+    text-align: left;
+    direction: ltr;
+    text-shadow: 0 0 5px #0f0;
+    position: relative;
+}
+
+/* افکت اسکن برای کنسول */
+#network-console::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(0, 255, 0, 0.3), transparent);
+    animation: scan 3s linear infinite;
+}
+
+/* انیمیشن اسکن */
+@keyframes scan {
+    0% { left: -100%; }
+    100% { left: 100%; }
+}
+/* استایل تیتر Shahab Hacker */
+h1.neon-text {
+    text-align: center;
+    margin-bottom: 20px;
+    color: rgb(255, 0, 0); /* سبز نئونی */
+    font-family: 'VT323', monospace;
+    font-size: 48px; /* بزرگ‌تر برای جذابیت */
+    text-shadow: 
+        0 0 10px #0f0,
+        0 0 20px #0f0,
+        0 0 30px #00f,
+        0 0 40px #00f;
+    animation: flicker 1.5s infinite alternate, neon-load 2s ease-in-out;
+    position: relative;
+    letter-spacing: 2px;
+}
+
+/* افکت اسکن برای تیتر */
+
+
+/* انیمیشن flicker برای نئون */
+@keyframes flicker {
+    0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
+        text-shadow: 
+            0 0 10px #0f0,
+            0 0 20px #0f0,
+            0 0 30px #00f,
+            0 0 40px #00f;
+    }
+    20%, 24%, 55% {
+        text-shadow: none;
+    }
+}
+
+/* انیمیشن لود شدن تیتر */
+@keyframes neon-load {
+    0% { opacity: 0; transform: translateY(-20px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+
+/* انیمیشن اسکن */
+@keyframes scan {
+    0% { left: -100%; }
+    100% { left: 100%; }
+}

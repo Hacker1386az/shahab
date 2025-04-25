@@ -1,0 +1,248 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'VT323', monospace;
+    background-color: #111;
+    color: white;
+    padding: 20px;
+    direction: rtl;
+    text-align: right;
+    background-image: url('https://uploadkon.ir/uploads/891915_25Jowhareh-galleries-3-poster-45773b6b-6408-46c3-b077-f0cb14cc3491.jpeg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    position: relative;
+    overflow-x: hidden;
+    z-index: 1;
+}
+
+/* لایه ماتریکس */
+.matrix-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExYzI0N2ZiNzY2YzVhOTVhNGM5YzZiYzVhYzVhYzVhYzVhYzVhYzVhYQ&ep=v1_gifs_search&rid=giphy.gif') repeat;
+    opacity: 0.3;
+    z-index: 0;
+    animation: matrix-scroll 15s linear infinite;
+}
+
+@keyframes matrix-scroll {
+    0% { background-position: 0 0; }
+    100% { background-position: 0 -1000px; }
+}
+
+/* لایه نویز دیجیتال برای گلیچ */
+.digital-noise {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('https://www.transparenttextures.com/patterns/noise.png') repeat;
+    opacity: 0;
+    z-index: 2;
+    pointer-events: none;
+    animation: noise-flash 0.2s infinite paused;
+}
+
+@keyframes noise-flash {
+    0% { opacity: 0.5; }
+    50% { opacity: 0.2; }
+    100% { opacity: 0.5; }
+}
+
+/* گلیچ کل صفحه */
+.glitch-page {
+    animation: page-glitch 0.3s ease-in-out;
+}
+
+@keyframes page-glitch {
+    0% { transform: translate(0); filter: hue-rotate(0deg); }
+    20% { transform: translate(-5px, 5px); filter: hue-rotate(90deg); }
+    40% { transform: translate(5px, -5px); filter: hue-rotate(-90deg); }
+    60% { transform: translate(-5px, -5px); filter: hue-rotate(180deg); }
+    80% { transform: translate(5px, 5px); filter: hue-rotate(0deg); }
+    100% { transform: translate(0); filter: hue-rotate(0deg); }
+}
+
+/* کانتینر */
+.container {
+    max-width: 600px;
+    margin: 10% auto;
+    background: rgba(0, 0, 0, 0.7);
+    padding: 30px;
+    border-radius: 10px;
+    border: 2px solid #ff0000;
+    box-shadow: 0 0 20px rgba(255, 0, 0, 0.5);
+    text-align: center;
+}
+
+/* تیتر */
+h1.neon-text {
+    color: #ff0000;
+    font-size: 48px;
+    text-shadow: 0 0 10px #ff0000, 0 0 20px #ff0000, 0 0 30px #ff4500;
+    animation: flicker 1.5s infinite alternate, neon-load 2s ease-in-out;
+    position: relative;
+    letter-spacing: 2px;
+}
+
+/* گلیچ پیشرفته تیتر */
+.glitch::before,
+.glitch::after {
+    content: 'Enter Access Code';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    color: #fff;
+    opacity: 0.8;
+    clip-path: polygon(0 0, 100% 0, 100% 33%, 0 33%);
+}
+
+.glitch::after {
+    color: #00f;
+    clip-path: polygon(0 67%, 100% 67%, 100% 100%, 0 100%);
+    animation: glitch 0.5s infinite, glitch-shift 2s infinite;
+}
+
+@keyframes glitch {
+    0% { transform: translate(0); }
+    20% { transform: translate(-6px, 6px); }
+    40% { transform: translate(6px, -6px); }
+    60% { transform: translate(-6px, -6px); }
+    80% { transform: translate(6px, 6px); }
+    100% { transform: translate(0); }
+}
+
+@keyframes glitch-shift {
+    0% { clip-path: polygon(0 0, 100% 0, 100% 33%, 0 33%); }
+    50% { clip-path: polygon(0 33%, 100% 33%, 100% 66%, 0 66%); }
+    100% { clip-path: polygon(0 66%, 100% 66%, 100% 100%, 0 100%); }
+}
+
+@keyframes neon-load {
+    0% { opacity: 0; transform: translateY(-20px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes flicker {
+    0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
+        text-shadow: 0 0 10px #ff0000, 0 0 20px #ff0000, 0 0 30px #ff4500;
+    }
+    20%, 24%, 55% {
+        text-shadow: none;
+    }
+}
+
+/* ورودی و دکمه */
+.custom-input {
+    padding: 15px;
+    margin: 15px 0;
+    border: 2px solid #ff0000;
+    border-radius: 10px;
+    background-color: #222;
+    color: #fff;
+    width: 100%;
+    font-family: 'VT323', monospace;
+    font-size: 18px;
+}
+
+.custom-input:focus {
+    outline: none;
+    border-color: #ff0;
+    box-shadow: 0 0 10px #ff0;
+}
+
+.neon-button {
+    border: 2px solid #ff0000;
+    background: none;
+    color: #ff0000;
+    padding: 10px 20px;
+    font-family: 'VT323', monospace;
+    font-size: 18px;
+    cursor: pointer;
+    text-shadow: 0 0 5px #ff0000;
+    transition: all 0.3s;
+}
+
+.neon-button:hover {
+    background: #ff0000;
+    color: #000;
+    box-shadow: 0 0 15px #ff0000;
+}
+
+/* نتیجه ورود */
+#login-result {
+    margin-top: 15px;
+    background: #111;
+    border: 1px solid #ff0000;
+    padding: 15px;
+    border-radius: 5px;
+    font-family: 'Courier New', monospace;
+    font-size: 16px;
+    text-align: left;
+    direction: ltr;
+    color: #ff0000;
+    text-shadow: 0 0 5px #ff0000;
+    min-height: 60px;
+    position: relative;
+    overflow: hidden;
+}
+
+/* گلیچ نتیجه */
+.console-glitch::before {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    color: #fff;
+    opacity: 0.8;
+    animation: console-glitch 0.4s infinite;
+}
+
+.console-glitch::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    color: #00f;
+    opacity: 0.8;
+    animation: console-glitch 0.6s infinite;
+}
+
+@keyframes console-glitch {
+    0% { transform: translate(0); }
+    20% { transform: translate(-3px, 3px); }
+    40% { transform: translate(3px, -3px); }
+    60% { transform: translate(-3px, -3px); }
+    80% { transform: translate(3px, 3px); }
+    100% { transform: translate(0); }
+}
+
+/* افکت اسکن قرمز */
+#login-result::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 0, 0, 0.3), transparent);
+    animation: scan 2s linear infinite;
+}
+
+@keyframes scan {
+    0% { left: -100%; }
+    100% { left: 100%; }
+}
